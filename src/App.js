@@ -1,23 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import jsPDF from 'jspdf';
 
 function App() {
-  return (
+  function generatePDF() {
+    var doc = new jsPDF("p", "pt", "legal");
+    doc.html(document.querySelector("#content"), {
+      callback: function (pdf) {
+          pdf.save("mypdf.pdf");
+      }
+    })
+
+  } return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="content" style={{padding:"20px"}}>
+        <h1> html to pdf1</h1>
+        <h1> html to pdf2</h1>
+        <h1> html to pdf3</h1>
+        <h1> html to pdf4</h1>
+        <h1> html to pdf5</h1>
+      </div>
+      <button onClick={() => generatePDF()}>Generate Pdf</button>
     </div>
   );
 }
